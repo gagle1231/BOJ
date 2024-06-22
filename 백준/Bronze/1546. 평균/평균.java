@@ -3,18 +3,16 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        float[] arr = new float[n];
-        float m = 0;
-        for(int i=0; i<n; i++){
-            arr[i] = sc.nextInt();
-            m = m < arr[i] ? arr[i] : m;
-        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
         float sum = 0;
+        int max = 0;
         for(int i=0; i<n; i++){
-            sum += (arr[i]/m)*100;
+           int num = Integer.parseInt(st.nextToken());
+           sum += num;
+           max = max < num ? num : max;
         }
-        System.out.println(sum/n);
+        System.out.println(sum/max*100/n);
     }
 }
