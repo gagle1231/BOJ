@@ -25,7 +25,7 @@ public class Main {
             int x2 = Integer.parseInt(st.nextToken());
             int y2 = Integer.parseInt(st.nextToken());
             int as = sub[x2][y2] - (sub[x2][y1]+sub[x1][y2]) + sub[x1][y1];
-            sb.append(as+"\n");
+            sb.append(as).append("\n");
         }
         System.out.println(sb);
     }
