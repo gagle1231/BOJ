@@ -17,7 +17,7 @@ public class Main {
                 sub[i][j] = sub[i-1][j] + sub[i][j-1] + Integer.parseInt(st.nextToken()) - sub[i-1][j-1];
             }
         }
-
+        StringBuilder sb = new StringBuilder();
         for(int i=1; i<=m; i++){
             st = new StringTokenizer(br.readLine());
             int x1 = Integer.parseInt(st.nextToken())-1;
@@ -25,7 +25,8 @@ public class Main {
             int x2 = Integer.parseInt(st.nextToken());
             int y2 = Integer.parseInt(st.nextToken());
             int as = sub[x2][y2] - (sub[x2][y1]+sub[x1][y2]) + sub[x1][y1];
-            System.out.println(as);
+            sb.append(as+"\n");
         }
+        System.out.println(sb);
     }
 }
