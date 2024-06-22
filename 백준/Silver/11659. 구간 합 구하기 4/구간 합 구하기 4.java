@@ -8,14 +8,11 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        int[] arr = new int[n+1];
         int[] sub = new int[n+1];
-
-        arr[0] = sub[0] = 0;
+        sub[0] = 0;
         st = new StringTokenizer(br.readLine());
         for(int i=1; i<=n; i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-            sub[i] = arr[i] + sub[i-1];
+            sub[i] = Integer.parseInt(st.nextToken()) + sub[i-1];
         }
         StringBuilder sb = new StringBuilder();
         for(int i=0; i<m; i++){
