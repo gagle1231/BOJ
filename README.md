@@ -1,8 +1,5 @@
 # BOJ
 
-[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=gae1374)](https://solved.ac/gae1374/)
-
-
 -주 3문제 이상 풀기 목표  
 
 -사용 언어: Java
