@@ -39,7 +39,8 @@ public class Main {
         if(visited[n]) return ;
         visited[n] = true;
         for(int i: list[n]){
-            DFS(i);
+            if(!visited[i])
+                DFS(i);
         }
     }
 }
