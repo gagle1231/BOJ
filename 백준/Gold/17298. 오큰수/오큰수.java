@@ -1,34 +1,34 @@
 import java.io.*;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
-        int[] answer = new int[n];
-        int idx = 0;
-        for(String s : br.readLine().split(" ")) {
-            arr[idx++] = Integer.parseInt(s);
-        }
-
-        Stack<Integer> stack = new Stack<>(); // 인덱스를 담을 스택
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        Stack<Integer> stack = new Stack<>(); //인덱스를 저장할 스택
         stack.push(0);
-
-        for(int i = 0; i < n; i++) {
-            while(!stack.isEmpty() && arr[stack.peek()] < arr[i]){
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        int[] answer = new int[n];
+        for(int i=0; i<n; i++){
+            //스택의 상단에 있는 원소보다 현재 원소가 더 크면
+            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]){
                 answer[stack.pop()] = arr[i];
             }
             stack.push(i);
         }
 
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()){
             answer[stack.pop()] = -1;
         }
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        for(int i = 0; i < n; i++) {
-            bw.write(answer[i] + " ");
+        StringBuilder sb  =  new StringBuilder();
+        for(int i: answer){
+            sb.append(i).append(" ");
         }
-        bw.flush(); bw.close();
+        System.out.println(sb);
     }
+
 }
