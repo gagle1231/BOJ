@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -10,29 +10,29 @@ public class Main {
         String str = br.readLine();
         String bump = br.readLine();
         int n = bump.length();
-        Stack<Character> stack = new Stack<>();
+        ArrayList<Character> list = new ArrayList<>();
         for(char c : str.toCharArray()){
-            stack.push(c);
+            list.add(c);
             boolean find = true;
-            if(stack.size() >= n){
+            if(list.size() >= n){
                 for(int i=0; i<n; i++){
-                    if(bump.charAt(i) != stack.get(stack.size() - n + i)){
+                    if(bump.charAt(i) != list.get(list.size() - n + i)){
                         find = false;
                         break;
                     }
                 }
                 if(find){
                     for(int i=0; i<n; i++){
-                        stack.pop();
+                        list.remove(list.size() - 1);
                     }
                 }
             }
         }
-        if(stack.isEmpty()){
+        if(list.isEmpty()){
             System.out.println("FRULA");
         }else{
             StringBuilder sb = new StringBuilder();
-            for(char c: stack){
+            for(char c: list){
                 sb.append(c);
             }
             System.out.println(sb);
