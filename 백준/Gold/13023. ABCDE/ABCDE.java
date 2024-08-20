@@ -1,61 +1,54 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    static int n;
-    static boolean check;
     static List<Integer>[] lists;
-    static boolean[] back;
+    static boolean[] visited;
+    public static boolean check;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
 
-        lists = new List[n];
-        back = new boolean[n];
-        for(int i=0; i<n; i++){
+        lists = new List[n+1];
+        for (int i = 0; i < n; i++) {
             lists[i] = new ArrayList<>();
         }
-        for (int i = 0; i < m; i++) {
+        for(int i=1; i<=m; i++) {
             st = new StringTokenizer(br.readLine());
-
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-
-            lists[a].add(b);
-            lists[b].add(a);
+            int v1 = Integer.parseInt(st.nextToken());
+            int v2 = Integer.parseInt(st.nextToken());
+            lists[v1].add(v2);
+            lists[v2].add(v1);
         }
 
-        for(int i=0; i<m; i++){
-            DFS(i, 1);
-            if(check){
-                System.out.println(1);
-                return;
+        boolean flag = false;
+        visited = new boolean[n+1];
+        for(int i=0; i<n; i++) {
+            if(dfs(i, 1)){
+                    flag = true;
+                    break;
             }
         }
-        System.out.println(0);
+        System.out.println(flag ? 1 : 0);
     }
 
-    public static boolean DFS(int num, int depth) {
+    public static boolean dfs(int n, int depth){
         if(depth == 5){
-            return check = true;
+            return true;
         }
-        if(!back[num]) {
-            back[num] = true;  // 현재 노드 방문 표시
-            for(int i : lists[num]) {
-                if(!back[i]) {
-                    if(DFS(i, depth + 1)) return true;
-                }
+        visited[n] = true;
+        for(int v: lists[n]){
+            if(!visited[v]){
+                 if(dfs(v, depth+1))
+                     return true;
             }
-            back[num] = false;  // 재귀 호출이 끝난 후 방문 표시 해제
         }
+        visited[n] = false;
         return false;
     }
 }
