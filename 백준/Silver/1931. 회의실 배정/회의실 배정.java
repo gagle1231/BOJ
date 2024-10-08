@@ -1,36 +1,30 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[][] m = new int[n][2];
-        String str;
-        StringTokenizer st;
-        for(int i=0; i<n; i++){
-            str = br.readLine();
-            st = new StringTokenizer(str);
-            m[i][0] = Integer.parseInt(st.nextToken());
-            m[i][1] = Integer.parseInt(st.nextToken());
+    public static void main(String[] args)  {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        // int 배열로 변경
+        PriorityQueue<int[]> queue = new PriorityQueue<>(
+                Comparator.comparingInt((int[] o) -> o[1]).thenComparingInt(o -> o[0])
+        );
+        
+        for (int i = 0; i < n; i++) {
+            int s = sc.nextInt();
+            int e = sc.nextInt();
+            queue.add(new int[]{s, e});
         }
-        Arrays.sort(m, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[1] == o2[1] ? o1[0] - o2[0] : o1[1] - o2[1];
-            }
-        });
 
         int count = 1;
-        int endTime = m[0][1];
-        for(int i=1; i<n; i++){
-            if(m[i][0]>=endTime) {
+        int lastTime = queue.poll()[1];
+        while (!queue.isEmpty()) {
+            int[] e = queue.poll();
+            if (e[0] >= lastTime) {
                 count++;
-                endTime = m[i][1];
+                lastTime = e[1];
             }
         }
         System.out.println(count);
